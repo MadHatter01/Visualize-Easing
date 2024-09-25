@@ -2,33 +2,33 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { animated, useSpring } from 'react-spring'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [easing, setEasing] = useState('easeInOut');
+
+  const easings = {};
+
+  const springProps = useSpring({
+    config: {duration:2000, easing:easings[easing]},
+    from:{transform: 'translateX(0px'},
+    to:{transform:'translateX(200px)'},
+    reset:true,
+  })
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+<div>
+<select onChange={(e)=>setEasing(e.target.value)}>
+  <option value='easeInOut'>Ease In Out</option>
+  <option value='easeIn'>Ease In</option>
+  <option value='easeOut'>Ease Out</option>
+  <option value='linear'>Linear</option>
+</select>
+<div className='animation'>
+  <animated.div style={springProps} className="ball" />
+</div>
+  </div>
   )
 }
 
