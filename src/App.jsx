@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { animated, useSpring } from 'react-spring'
+import Curves from './Curves'
 
 function App() {
   const [easing, setEasing] = useState('easeInOut');
@@ -31,7 +32,10 @@ function App() {
 </select>
 <div className='animation'>
   <animated.div style={springProps} className="ball" />
+
 </div>
+
+<Curves />
   </div>
   )
 }
