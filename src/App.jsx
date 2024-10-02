@@ -7,7 +7,11 @@ import { animated, useSpring } from 'react-spring'
 function App() {
   const [easing, setEasing] = useState('easeInOut');
 
-  const easings = {};
+  const easings = {
+    easeIn: t => t * t,
+    easeOut: t => t * (2 - t),
+    linear: t => t
+  };
 
   const springProps = useSpring({
     config: {duration:2000, easing:easings[easing]},
